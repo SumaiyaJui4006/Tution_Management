@@ -1,0 +1,34 @@
+﻿@model IEnumerable<TuitionMedia_Management.Models.Tutor>
+    <table class="table table-bordered">
+        <thead class="table-primary">
+            <tr>
+            <th></th>
+            <th>Tutor name </th>
+            <th>Join Date </th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Available ?</th>
+            <th>...</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var c in Model)
+            {
+                <tr id="tr_@c.Tutorid">
+                    <td><img src="~/Pictures/@c.Picture" class="img-thumbnail" style="width:60px" /></td>
+                    <td>@c.Tutorname</td>
+                    <td>@c.JoinDate.ToString("yyyy-MM-dd")</td>
+                    <td>Phone</td>
+                    <td>@c.Email</td>
+                    <td>@(c.Available.Value ? "Yes": "No")</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Tutors", new { id = c.Tutorid }, new { @class = "btn btn-primary btn-sm" })
+                        &nbsp;
+                        @Ajax.ActionLink("Delete", "Delete", "Tutors", new { id = c.Tutorid },
+                           new AjaxOptions { HttpMethod = "Post", OnBegin = "onBegin", OnSuccess = "onSuccess" },
+                           new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

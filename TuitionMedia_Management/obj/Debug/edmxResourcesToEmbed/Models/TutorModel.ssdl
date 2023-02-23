@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TuitionmediaDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Qualifications">
+    <Key>
+      <PropertyRef Name="QualificationId" />
+    </Key>
+    <Property Name="QualificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PassingYear" Type="int" Nullable="false" />
+    <Property Name="Result" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Institute" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tutorid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tutors">
+    <Key>
+      <PropertyRef Name="Tutorid" />
+    </Key>
+    <Property Name="Tutorid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tutorname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="JoinDate" Type="date" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Picture" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Available" Type="bit" />
+  </EntityType>
+  <Association Name="FK__Qualifica__Tutor__38996AB5">
+    <End Role="Tutors" Type="Self.Tutors" Multiplicity="1" />
+    <End Role="Qualifications" Type="Self.Qualifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tutors">
+        <PropertyRef Name="Tutorid" />
+      </Principal>
+      <Dependent Role="Qualifications">
+        <PropertyRef Name="Tutorid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TuitionmediaDbModelStoreContainer">
+    <EntitySet Name="Qualifications" EntityType="Self.Qualifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tutors" EntityType="Self.Tutors" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Qualifica__Tutor__38996AB5" Association="Self.FK__Qualifica__Tutor__38996AB5">
+      <End Role="Tutors" EntitySet="Tutors" />
+      <End Role="Qualifications" EntitySet="Qualifications" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

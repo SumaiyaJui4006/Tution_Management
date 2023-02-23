@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TuitionmediaDbModelStoreContainer" CdmEntityContainer="TutorDbContext">
+    <EntitySetMapping Name="Qualifications">
+      <EntityTypeMapping TypeName="TuitionmediaDbModel.Qualification">
+        <MappingFragment StoreEntitySet="Qualifications">
+          <ScalarProperty Name="QualificationId" ColumnName="QualificationId" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="PassingYear" ColumnName="PassingYear" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Institute" ColumnName="Institute" />
+          <ScalarProperty Name="Tutorid" ColumnName="Tutorid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tutors">
+      <EntityTypeMapping TypeName="TuitionmediaDbModel.Tutor">
+        <MappingFragment StoreEntitySet="Tutors">
+          <ScalarProperty Name="Tutorid" ColumnName="Tutorid" />
+          <ScalarProperty Name="Tutorname" ColumnName="Tutorname" />
+          <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Available" ColumnName="Available" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

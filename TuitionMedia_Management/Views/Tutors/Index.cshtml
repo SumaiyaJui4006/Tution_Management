@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-end mb-2">
+            @Html.ActionLink("Create new", "Create", new { }, new { @class = "btn btn-primary" })
+        </div>
+        @Html.Action("TutorList", "Tutors")
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.3.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function onBegin(ev) {
+            if (!confirm("Are you sure to delete?")) ev.preventDefault();
+        }
+        function onSuccess(r) {
+            if (r.success) {
+                $("#tr_" + r.id).remove();
+            }
+            else {
+                alert("Cannot delete data with realted child.")
+            }
+        }
+    </script>
+}
+
+

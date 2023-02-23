@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TuitionMedia_Management.Models.Qualification>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-12">
+        <h3>Qualifications</h3>
+        <div class="d-flex justify-content-end mb-1">
+            @Html.ActionLink("Create new", "Create", "Qualifications", new { }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Tutor</th>
+                    <th>Degree</th>
+                    <th>Univarsity/College/Institute</th>
+                    <th>PassingYear</th>
+                    <th>Result</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var q in Model)
+                {
+                    <tr id="tr_@q.QualificationId">
+                        
+                        <td>@q.Tutor.Tutorname</td>
+                        <td>@q.Degree</td>
+                        <td>@q.Institute</td>
+                        <td>@q.PassingYear</td>
+                        <td>@q.Result</td>
+                        <th>
+                            @Html.ActionLink("Edit", "Edit", "Qualifications", new { @id = q.QualificationId }, new { @class = "btn btn-primary btn-sm" })
+                            @Ajax.ActionLink("Delete", "Delete", "Qualifications", new { id = q.QualificationId },
+                           new AjaxOptions { HttpMethod = "Post", OnBegin= "OnBegin", OnSuccess = "OnSuccess", },
+                           new { @class = "btn btn-danger btn-sm del" })
+
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.3.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function OnSuccess(r){
+            $("#tr_" + r.id).remove();
+        }
+        function OnBegin(ev) {
+            if (!confirm("Are you sure to delete?")) ev.preventDefault();
+        }
+    </script>
+}
+

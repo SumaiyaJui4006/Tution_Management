@@ -1,0 +1,22 @@
+﻿CREATE TABLE Tutors 
+(
+	Tutorid INT IDENTITY PRIMARY KEY,
+	Tutorname NVARCHAR(50) NOT NULL,
+	JoinDate Date NOT NULL,
+	Phone INT NOT NULL,
+	Email NVARCHAR(100) NOT NULL,
+	Picture NVARCHAR(500) NOT NULL,
+	Available BIT
+	
+)
+GO
+CREATE TABLE Qualifications
+(
+	QualificationId INT IDENTITY PRIMARY KEY,
+	Degree NVARCHAR(50) NOT NULL,
+	PassingYear INT NOT NULL,
+	Result NVARCHAR(30) NOT NULL,
+	Institute NVARCHAR(50) NOT NULL,
+	Tutorid INT NOT NULL REFERENCES Tutors(Tutorid)
+)
+GO

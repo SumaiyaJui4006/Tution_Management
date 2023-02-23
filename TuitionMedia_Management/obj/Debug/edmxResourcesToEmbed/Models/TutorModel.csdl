@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TuitionmediaDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Qualification">
+    <Key>
+      <PropertyRef Name="QualificationId" />
+    </Key>
+    <Property Name="QualificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PassingYear" Type="Int32" Nullable="false" />
+    <Property Name="Result" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Institute" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Tutorid" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tutor" Relationship="Self.FK__Qualifica__Tutor__38996AB5" FromRole="Qualifications" ToRole="Tutors" />
+  </EntityType>
+  <EntityType Name="Tutor">
+    <Key>
+      <PropertyRef Name="Tutorid" />
+    </Key>
+    <Property Name="Tutorid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tutorname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="JoinDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Phone" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Picture" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Available" Type="Boolean" />
+    <NavigationProperty Name="Qualifications" Relationship="Self.FK__Qualifica__Tutor__38996AB5" FromRole="Tutors" ToRole="Qualifications" />
+  </EntityType>
+  <Association Name="FK__Qualifica__Tutor__38996AB5">
+    <End Role="Tutors" Type="Self.Tutor" Multiplicity="1" />
+    <End Role="Qualifications" Type="Self.Qualification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tutors">
+        <PropertyRef Name="Tutorid" />
+      </Principal>
+      <Dependent Role="Qualifications">
+        <PropertyRef Name="Tutorid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TutorDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Qualifications" EntityType="Self.Qualification" />
+    <EntitySet Name="Tutors" EntityType="Self.Tutor" />
+    <AssociationSet Name="FK__Qualifica__Tutor__38996AB5" Association="Self.FK__Qualifica__Tutor__38996AB5">
+      <End Role="Tutors" EntitySet="Tutors" />
+      <End Role="Qualifications" EntitySet="Qualifications" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
